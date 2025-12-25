@@ -12,7 +12,7 @@ let db = null;
 
 // Email configuration (Brevo SMTP)
 const transporter = nodemailer.createTransport({
-  host: 'smtp-brevo.com',
+  host: 'smtp-relay.brevo.com',
   port: 587,
   secure: false,
   auth: {
@@ -164,7 +164,7 @@ app.post('/api/email', (req, res) => {
 
     // Send confirmation email
     const mailOptions = {
-      from: `GitBoost <${process.env.EMAIL_USER || 'noreply@gitboost.dev'}>`,
+      from: `GitBoost <${process.env.EMAIL_FROM || process.env.EMAIL_USER || 'noreply@gitboost.dev'}>`,
       to: email,
       subject: 'Welcome to GitBoost Early Access 🚀',
       html: `
