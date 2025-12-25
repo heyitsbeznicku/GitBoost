@@ -19,9 +19,6 @@ function logEmailEnv() {
 }
 logEmailEnv();
 
-// Log actual SMTP config being used (masked)
-console.log(`🔧 SMTP Config: host=${transporter.options.host}, port=${transporter.options.port}, user=${transporter.options.auth?.user || 'none'}`);
-
 // DMARC warning disabled — user confirms local send works with Gmail
 // function warnSenderCompliance() {
 //   const from = process.env.EMAIL_FROM || '';
