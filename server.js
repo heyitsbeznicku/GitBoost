@@ -10,12 +10,14 @@ const PORT = process.env.PORT || 3001;
 const dbPath = path.join(__dirname, 'prelaunch.db');
 let db = null;
 
-// Email configuration (update with your email)
+// Email configuration (Brevo SMTP)
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp-brevo.com',
+  port: 587,
+  secure: false,
   auth: {
-    user: process.env.EMAIL_USER || 'your-email@gmail.com',
-    pass: process.env.EMAIL_PASS || 'your-app-password'
+    user: process.env.EMAIL_USER || '9ec2fb001@smtp-brevo.com',
+    pass: process.env.EMAIL_PASS || '4R1Vh68S5arEQFCw'
   }
 });
 
