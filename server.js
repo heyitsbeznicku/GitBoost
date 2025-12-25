@@ -158,12 +158,13 @@ app.post('/api/email', (req, res) => {
 
   try {
     dbRun('INSERT INTO emails (email) VALUES (?)', [email]);
-    
+    console.log('✅ Email saved to database:', email);
+
     // Send confirmation email
     const mailOptions = {
       from: `GitBoost <${process.env.EMAIL_USER || 'noreply@gitboost.dev'}>`,
       to: email,
-      subject: 'Welcome to GitBoost – Confirmation ✓',
+      subject: 'Welcome to GitBoost Early Access 🚀',
       html: `
         <!DOCTYPE html>
         <html>
@@ -193,7 +194,7 @@ app.post('/api/email', (req, res) => {
                   <tr>
                     <td style="padding: 40px;">
                       <p style="margin: 0 0 20px; color: #333333; font-size: 16px; line-height: 1.6;">
-                        Hello,
+                       Hi there,
                       </p>
                       <p style="margin: 0 0 24px; color: #333333; font-size: 16px; line-height: 1.6;">
                         We're excited to have you onboard with <strong>GitBoost</strong>. Your registration has been confirmed, and you'll be among the first to know when we launch.
