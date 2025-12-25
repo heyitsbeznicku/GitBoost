@@ -203,7 +203,7 @@ app.post('/api/email', (req, res) => {
                         <span style="color: #ffffff; font-size: 24px; font-weight: bold; letter-spacing: 0.5px;">GB</span>
                       </div>
                       <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 600; line-height: 1.3;">
-                        Thank you for signing up!
+                        You're on the list!
                       </h1>
                     </td>
                   </tr>
@@ -215,7 +215,7 @@ app.post('/api/email', (req, res) => {
                        Hi there,
                       </p>
                       <p style="margin: 0 0 24px; color: #333333; font-size: 16px; line-height: 1.6;">
-                        We're excited to have you onboard with <strong>GitBoost</strong>. Your registration has been confirmed, and you'll be among the first to know when we launch.
+                        Thank you for joining <strong>GitBoost</strong> early access. You're now part of an exclusive group who will be first to access our professional project blueprint generator.
                       </p>
                       
                       <div style="background-color: #f8f9fa; border-left: 4px solid #34D3B5; padding: 20px; margin: 24px 0; border-radius: 4px;">
