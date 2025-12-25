@@ -1,0 +1,32 @@
+{
+  "name": "GitBoost-prelaunch",
+  "version": "0.1.0",
+  "description": "GitBoost Pre-Launch - Free Blueprint Generator for Student Developers",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "github",
+    "portfolio",
+    "blueprint",
+    "project-generator",
+    "student-projects"
+  ],
+  "author": "GitBoost Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemailer": "^6.10.1",
+    "sql.js": "^1.8.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}
