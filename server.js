@@ -303,6 +303,7 @@ app.post('/api/email', (req, res) => {
       `
     };
 
+    console.log('📧 Triggering send to:', email);
     transporter.sendMail(mailOptions, (err, info) => {
       if (err) {
         console.log('Email send error:', err.message);
