@@ -19,16 +19,16 @@ function logEmailEnv() {
 }
 logEmailEnv();
 
-function warnSenderCompliance() {
-  const from = process.env.EMAIL_FROM || '';
-  const domain = from.split('@')[1] || '';
-  const risky = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'live.com'];
-  if (domain && risky.includes(domain.toLowerCase())) {
-    console.log('⚠️  Sender domain may be non-compliant with DMARC for third-party SMTP.');
-    console.log('    Use a domain-based address (e.g., noreply@yourdomain.com) with DKIM+DMARC set in Brevo.');
-  }
-}
-warnSenderCompliance();
+// DMARC warning disabled — user confirms local send works with Gmail
+// function warnSenderCompliance() {
+//   const from = process.env.EMAIL_FROM || '';
+//   const domain = from.split('@')[1] || '';
+//   const risky = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'live.com'];
+//   if (domain && risky.includes(domain.toLowerCase())) {
+//     console.log('⚠️  Sender domain may be non-compliant with DMARC for third-party SMTP.');
+//     console.log('    Use a domain-based address (e.g., noreply@yourdomain.com) with DKIM+DMARC set in Brevo.');
+//   }
+// }
 
 // Email configuration (Brevo SMTP)
 const transporter = nodemailer.createTransport({
