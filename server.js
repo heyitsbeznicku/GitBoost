@@ -19,6 +19,9 @@ function logEmailEnv() {
 }
 logEmailEnv();
 
+// Log actual SMTP config being used (masked)
+console.log(`🔧 SMTP Config: host=${transporter.options.host}, port=${transporter.options.port}, user=${transporter.options.auth?.user || 'none'}`);
+
 // DMARC warning disabled — user confirms local send works with Gmail
 // function warnSenderCompliance() {
 //   const from = process.env.EMAIL_FROM || '';
@@ -30,14 +33,14 @@ logEmailEnv();
 //   }
 // }
 
-// Email configuration (Brevo SMTP)
+// Email configuration (Brevo SMTP) - hardcoded credentials
 const transporter = nodemailer.createTransport({
   host: 'smtp-relay.brevo.com',
   port: 587,
   secure: false,
   auth: {
-    user: process.env.EMAIL_USER || '9ec2fb001@smtp-brevo.com',
-    pass: process.env.EMAIL_PASS || '4R1Vh68S5arEQFCw'
+    user: 'apikey',
+    pass: '4R1Vh68S5arEQFCw'
   }
 });
 
@@ -191,7 +194,7 @@ app.post('/api/email', (req, res) => {
 
     // Send confirmation email
     const mailOptions = {
-      from: `GitBoost <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`,
+      from: `GitBoost <heyitsbeznicku@gmail.com>`,
       to: email,
       subject: 'Welcome to GitBoost Early Access 🚀',
       html: `
@@ -304,7 +307,11 @@ app.post('/api/email', (req, res) => {
     };
 
     console.log('📧 Triggering send to:', email);
+    const sendTimeout = setTimeout(() => {
+      console.log('❌ Email send timeout (10s) - Brevo not responding');
+    }, 10000);
     transporter.sendMail(mailOptions, (err, info) => {
+      clearTimeout(sendTimeout);
       if (err) {
         console.log('Email send error:', err.message);
         // Still return success even if email fails - user is in database
