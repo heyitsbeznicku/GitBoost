@@ -53,14 +53,14 @@
     </header>
 
     <main class="mx-auto max-w-6xl px-6">
-        <!-- Counter Banner -->
+
         <div id="counterBanner" class="my-8 rounded-lg border border-accent-600/30 bg-accent-600/10 px-6 py-4 text-center hidden">
             <p class="text-sm text-accent-500 font-semibold">
                 <span id="emailCount">0</span> developers already joined our pre-launch 🎉
             </p>
         </div>
 
-        <!-- Hero -->
+
         <section class="py-16 md:py-24">
             <div class="space-y-8 text-center">
                 <div class="space-y-3">
@@ -79,7 +79,7 @@
             </div>
         </section>
 
-        <!-- How it works -->
+
         <section class="space-y-8 py-14" id="how">
             <div class="space-y-2">
                 <p class="text-sm uppercase tracking-[0.2em] text-accent-500">How it works</p>
@@ -111,7 +111,7 @@
             </div>
         </section>
 
-        <!-- What you get -->
+  
         <section class="space-y-8 py-14" id="features">
             <div class="space-y-3">
                 <p class="text-sm uppercase tracking-[0.2em] text-accent-500">What you get</p>
@@ -138,7 +138,7 @@
         </section>
 
 
-        <!-- erlyaccess & Email Signup -->
+
         <section class="py-16" id="erlyaccess">
             <div class="rounded-2xl border border-accent-600 bg-gradient-to-br from-black/50 to-accent-600/10 px-8 py-16 shadow-glow">
                 <div class="space-y-8 max-w-2xl mx-auto">
@@ -172,7 +172,7 @@
     </footer>
 
     <script>
-        // Load email count on page load
+
         async function loadEmailCount() {
             try {
                 const res = await fetch('/api/email-count');
@@ -181,7 +181,7 @@
                 
                 document.getElementById('emailCount').textContent = count;
                 
-                // Show counter if count >= 500
+
                 if (count >= 500) {
                     document.getElementById('counterBanner').classList.remove('hidden');
                 }
@@ -190,10 +190,10 @@
             }
         }
 
-        // Load count on page load
+
         document.addEventListener('DOMContentLoaded', loadEmailCount);
 
-        // Refresh count every 30 seconds
+
         setInterval(loadEmailCount, 30000);
 
         async function saveEmail(event) {
@@ -220,7 +220,7 @@
                     messageDiv.style.color = '#10b981';
                     messageDiv.textContent = '✓ ' + data.message;
                     document.getElementById('emailInput').value = '';
-                    // Refresh counter
+
                     loadEmailCount();
                 } else {
                     messageDiv.style.color = '#ef4444';
