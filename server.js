@@ -10,6 +10,15 @@ const PORT = process.env.PORT || 3001;
 const dbPath = path.join(__dirname, 'prelaunch.db');
 let db = null;
 
+// Log email env presence (masked) for deployment diagnostics
+function logEmailEnv() {
+  const hasUser = Boolean(process.env.EMAIL_USER);
+  const hasPass = Boolean(process.env.EMAIL_PASS);
+  const hasFrom = Boolean(process.env.EMAIL_FROM);
+  console.log(`📦 Email env → USER:${hasUser ? 'set' : 'missing'}, PASS:${hasPass ? 'set' : 'missing'}, FROM:${hasFrom ? 'set' : 'missing'}`);
+}
+logEmailEnv();
+
 // Email configuration (Brevo SMTP)
 const transporter = nodemailer.createTransport({
   host: 'smtp-relay.brevo.com',
@@ -21,15 +30,22 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Test email connection (optional, remove if causes issues)
-transporter.verify((error, success) => {
-  if (error) {
-    console.log('⚠️  Email service not configured. Confirmations will not be sent.');
-    console.log('   Set EMAIL_USER and EMAIL_PASS environment variables to enable email.');
-  } else {
-    console.log('✅ Email service ready');
-  }
-});
+// Optional: verify SMTP only if explicitly enabled
+if (process.env.EMAIL_VERIFY === 'true') {
+  transporter.verify((error, success) => {
+    if (error) {
+      const host = transporter.options.host || 'smtp';
+      const port = transporter.options.port || 'unknown';
+      console.log(`⚠️  Email check failed for ${host}:${port}`);
+      console.log('    Reason:', error.message);
+      console.log('    If USER/PASS are set, this is likely a network/auth or sender verification issue.');
+    } else {
+      console.log('✅ Email service ready');
+    }
+  });
+} else {
+  console.log('ℹ️  Email verification skipped (set EMAIL_VERIFY=true to enable).');
+}
 
 // Initialize database
 async function initDb() {
